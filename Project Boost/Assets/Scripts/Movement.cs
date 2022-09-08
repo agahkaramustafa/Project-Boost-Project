@@ -4,33 +4,54 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    Rigidbody playerRb;
+    [SerializeField] float thrustForce;
+    [SerializeField] int rotationSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerRb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        ProcessInput();
+        ProcessThrust();
+        ProcessRotation();
     }
 
-    void ProcessInput()
+    void ProcessThrust()
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            Debug.Log("space basýldý");
+            playerRb.AddRelativeForce(Vector3.up * Time.deltaTime * thrustForce);
         }
 
-        if (Input)
+    }
+
+    void ProcessRotation()
+    {
+        if (Input.GetKey(KeyCode.A))
         {
-            Debug.Log("sað sol yön");
+
+            ApplyRotation(rotationSpeed);
+
         }
 
-        if (Input.GetAxis("Vertical"))
+
+        else if (Input.GetKey(KeyCode.D))
         {
-            Debug.Log("yukarý aþaðý yön");
+
+            ApplyRotation(-rotationSpeed);
+
         }
+    }
+
+    private void ApplyRotation(int rotationThisFrame)
+    {
+        playerRb.freezeRotation = true;
+        transform.Rotate(Vector3.forward * rotationThisFrame * Time.deltaTime);
+        playerRb.freezeRotation = false;
     }
 }
