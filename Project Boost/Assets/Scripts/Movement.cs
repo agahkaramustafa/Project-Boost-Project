@@ -5,6 +5,8 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     Rigidbody playerRb;
+    AudioSource audioSource;
+
     [SerializeField] float thrustForce;
     [SerializeField] int rotationSpeed;
 
@@ -12,6 +14,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -26,6 +29,17 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             playerRb.AddRelativeForce(Vector3.up * Time.deltaTime * thrustForce);
+
+            if (!audioSource.isPlaying)
+            {
+                audioSource.time = 2.0f;
+                audioSource.Play();
+            }
+        }
+
+        else
+        {
+            audioSource.Stop();
         }
 
     }
