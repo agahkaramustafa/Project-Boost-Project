@@ -9,6 +9,7 @@ public class Movement : MonoBehaviour
 
     [SerializeField] float thrustForce;
     [SerializeField] int rotationSpeed;
+    [SerializeField] AudioClip mainEngine;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +34,7 @@ public class Movement : MonoBehaviour
             if (!audioSource.isPlaying)
             {
                 audioSource.time = 2.0f;
-                audioSource.Play();
+                audioSource.PlayOneShot(mainEngine);
             }
         }
 
