@@ -11,6 +11,10 @@ public class Movement : MonoBehaviour
     [SerializeField] int rotationSpeed;
     [SerializeField] AudioClip mainEngine;
 
+    [SerializeField] ParticleSystem thrustParticle;
+    [SerializeField] ParticleSystem leftParticle;
+    [SerializeField] ParticleSystem rightParticle;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,11 +40,17 @@ public class Movement : MonoBehaviour
                 //audioSource.time = 2.0f;
                 audioSource.PlayOneShot(mainEngine);
             }
+
+            if (!thrustParticle.isPlaying)
+            {
+                thrustParticle.Play();
+            }
         }
 
         else
         {
             audioSource.Stop();
+            thrustParticle.Stop();
         }
 
     }
@@ -49,18 +59,28 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
-
+            if (!leftParticle.isPlaying)
+            {
+                leftParticle.Play();
+            }
             ApplyRotation(rotationSpeed);
-
         }
-
 
         else if (Input.GetKey(KeyCode.D))
         {
-
+            if (!rightParticle.isPlaying)
+            {
+                rightParticle.Play();
+            }
             ApplyRotation(-rotationSpeed);
-
         }
+
+        else
+        {
+            leftParticle.Stop();
+            rightParticle.Stop();
+        }
+
     }
 
     private void ApplyRotation(int rotationThisFrame)
