@@ -33,7 +33,7 @@ public class Movement : MonoBehaviour
 
             if (!audioSource.isPlaying)
             {
-                audioSource.time = 2.0f;
+                //audioSource.time = 2.0f;
                 audioSource.PlayOneShot(mainEngine);
             }
         }

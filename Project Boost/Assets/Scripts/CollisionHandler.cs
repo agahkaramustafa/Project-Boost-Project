@@ -11,6 +11,7 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] AudioClip crashSound;
     [SerializeField] AudioClip successSound;
 
+    bool isTransitioning = false;
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -18,30 +19,35 @@ public class CollisionHandler : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        switch (other.gameObject.tag)
+        if (!isTransitioning)
         {
-            case "Friendly":
-                Debug.Log("This is friendly");
-                break;
+            switch (other.gameObject.tag)
+            {
+                case "Friendly":
+                    Debug.Log("This is friendly");
+                    break;
 
-            case "Finish":
-                Debug.Log("End of the game");
-                NextLevelSequence();
-                break;
+                case "Finish":
+                    Debug.Log("End of the game");
+                    NextLevelSequence();
+                    break;
 
-            case "Fuel":
-                Debug.Log("Fueled up!");
-                break;
+                case "Fuel":
+                    Debug.Log("Fueled up!");
+                    break;
 
-            default:
-                Debug.Log("Boom!");
-                StartCrashSequence();
-                break;
+                default:
+                    Debug.Log("Boom!");
+                    StartCrashSequence();
+                    break;
+            }
         }
+        
     }
     void StartCrashSequence()
     {
-
+        isTransitioning = true;
+        audioSource.Stop();
         audioSource.PlayOneShot(crashSound, 0.7f);
         GetComponent<Movement>().enabled = false;
         Invoke("ReloadScene", delay);
@@ -49,6 +55,8 @@ public class CollisionHandler : MonoBehaviour
 
     void NextLevelSequence()
     {
+        isTransitioning = true;
+        audioSource.Stop();
         audioSource.PlayOneShot(successSound);
         GetComponent<Movement>().enabled = false;
         Invoke("NextLevel", delay);

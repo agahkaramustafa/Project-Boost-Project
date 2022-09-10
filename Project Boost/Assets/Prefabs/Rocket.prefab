@@ -240,6 +240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef0e7b031234edd4fa63a08a233ba7ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 2
+  delay: 3
   crashSound: {fileID: 8300000, guid: af257b4bbb3ec794b870ae584e5fae54, type: 3}
   successSound: {fileID: 8300000, guid: 6d8dbf3fdaf571b4dbc747223c998d49, type: 3}
