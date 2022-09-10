@@ -15,35 +15,49 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] ParticleSystem successParticle;
 
     bool isTransitioning = false;
+    bool collisionDisabled = false;
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
     }
 
+    void Update()
+    {
+        RespondToDebugKeys();
+    }
+
+    void RespondToDebugKeys()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            NextLevelSequence();
+        }
+
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            collisionDisabled = !collisionDisabled;
+        }
+    }
+
     void OnCollisionEnter(Collision other)
     {
-        if (!isTransitioning)
+        if (isTransitioning || collisionDisabled) { return; }
+
+        switch (other.gameObject.tag)
         {
-            switch (other.gameObject.tag)
-            {
-                case "Friendly":
-                    Debug.Log("This is friendly");
-                    break;
+            case "Friendly":
+                Debug.Log("This is friendly");
+                break;
 
-                case "Finish":
-                    Debug.Log("End of the game");
-                    NextLevelSequence();
-                    break;
+            case "Finish":
+                Debug.Log("End of the game");
+                NextLevelSequence();
+                break;
 
-                case "Fuel":
-                    Debug.Log("Fueled up!");
-                    break;
-
-                default:
-                    Debug.Log("Boom!");
-                    StartCrashSequence();
-                    break;
-            }
+            default:
+                Debug.Log("Boom!");
+                StartCrashSequence();
+                break;
         }
         
     }
@@ -67,7 +81,7 @@ public class CollisionHandler : MonoBehaviour
         Invoke("NextLevel", delay);
     }
 
-    void NextLevel()
+    public void NextLevel()
     {
         int currentSceneIndex2 = SceneManager.GetActiveScene().buildIndex;
         int nextLevelIndex = currentSceneIndex2 + 1;
