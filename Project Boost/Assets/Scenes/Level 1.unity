@@ -1315,7 +1315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0910c6641098a5e4283902c8e9435b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementVector: {x: 16, y: 0, z: 0}
+  movementVector: {x: 10, y: 0, z: 0}
   period: 2
 --- !u!4 &1674465664 stripped
 Transform:
@@ -1510,6 +1510,63 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2005328403
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6956981379812054100, guid: 35076c6a18024744dbdceebed9df0628, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956981379812054100, guid: 35076c6a18024744dbdceebed9df0628, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956981379812054100, guid: 35076c6a18024744dbdceebed9df0628, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956981379812054100, guid: 35076c6a18024744dbdceebed9df0628, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956981379812054100, guid: 35076c6a18024744dbdceebed9df0628, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956981379812054100, guid: 35076c6a18024744dbdceebed9df0628, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956981379812054100, guid: 35076c6a18024744dbdceebed9df0628, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956981379812054100, guid: 35076c6a18024744dbdceebed9df0628, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956981379812054100, guid: 35076c6a18024744dbdceebed9df0628, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956981379812054100, guid: 35076c6a18024744dbdceebed9df0628, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956981379812054100, guid: 35076c6a18024744dbdceebed9df0628, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956981379812054101, guid: 35076c6a18024744dbdceebed9df0628, type: 3}
+      propertyPath: m_Name
+      value: ScoreKeeper
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 35076c6a18024744dbdceebed9df0628, type: 3}
 --- !u!1001 &2052668982
 PrefabInstance:
   m_ObjectHideFlags: 0
