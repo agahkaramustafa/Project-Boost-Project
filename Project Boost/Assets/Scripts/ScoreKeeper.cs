@@ -14,6 +14,11 @@ public class ScoreKeeper : MonoBehaviour
         ManageSingleton();
     }
 
+    void Start()
+    {
+        
+    }
+
     void ManageSingleton()
     { 
 
@@ -29,14 +34,15 @@ public class ScoreKeeper : MonoBehaviour
         }
     }
 
-    public void ModifyScore(int value)
+    public void ModifyScore()
     {
-        score += value;
-        Mathf.Clamp(score, 0, int.MaxValue);
+        score += 1;
     }
 
     public void ResetScore()
     {
         score = 0;
     }
+
+
 }

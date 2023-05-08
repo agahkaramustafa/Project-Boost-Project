@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class CollisionHandler : MonoBehaviour
 {
     AudioSource audioSource;
+    ScoreKeeper scoreKeeper;
 
     [SerializeField] float delay = 2f;
     [SerializeField] AudioClip crashSound;
@@ -15,10 +16,14 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] ParticleSystem successParticle;
 
     bool isTransitioning = false;
+    public bool GetIsTransitioning { get { return isTransitioning; } }
+
     bool collisionDisabled = false;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        scoreKeeper = FindObjectOfType<ScoreKeeper>();
     }
 
     void Update()
@@ -91,11 +96,15 @@ public class CollisionHandler : MonoBehaviour
             nextLevelIndex = 0;
         }
         SceneManager.LoadScene(nextLevelIndex);
+        FindObjectOfType<ScenePersist>().ResetScenePersist();
+        scoreKeeper.ResetScore();
     }
 
     void ReloadScene()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
+        FindObjectOfType<ScenePersist>().ResetScenePersist();
+        scoreKeeper.ResetScore();
     }
 }
