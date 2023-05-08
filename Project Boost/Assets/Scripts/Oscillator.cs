@@ -15,8 +15,7 @@ public class Oscillator : MonoBehaviour
         startingPosition = transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (period <= Mathf.Epsilon) { return; }
 
