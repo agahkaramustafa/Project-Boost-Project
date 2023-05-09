@@ -6,22 +6,35 @@ using UnityEngine;
 public class ScoreTextHandler : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI scoreText;
-
-    ScoreKeeper scoreKeeper;
-    ScenePersist scenePersist;
+    
+    public int collectibleCount;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        scoreKeeper = FindObjectOfType<ScoreKeeper>();
-        scenePersist = FindObjectOfType<ScenePersist>();
-
-        scoreText.text = $"Collected Stones: {scoreKeeper.GetCurrentScore} / {scenePersist.GetCollectibleCount}";
+        collectibleCount = FindObjectsOfType<CollectibleController>().Length;
+        
+        scoreText.text = $"Remaining Stones: {collectibleCount}";
     }
 
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = $"Score: {scoreKeeper.GetCurrentScore} / {scenePersist.GetCollectibleCount}";
+        
+    }
+
+    public void ModifyScoreText()
+    {
+        collectibleCount--;
+
+        if (collectibleCount == 0)
+        {
+            FindObjectOfType<ToggleLights>().ToggleLight();
+            scoreText.text = "Congrats! Go To The Blue Platform";
+        }
+        else
+        {
+            scoreText.text = $"Remaining Stones: {collectibleCount}";
+        }
     }
 }

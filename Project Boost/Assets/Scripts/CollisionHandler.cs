@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class CollisionHandler : MonoBehaviour
 {
     AudioSource audioSource;
-    ScoreKeeper scoreKeeper;
 
     [SerializeField] float delay = 2f;
     [SerializeField] AudioClip crashSound;
@@ -18,49 +17,34 @@ public class CollisionHandler : MonoBehaviour
     bool isTransitioning = false;
     public bool GetIsTransitioning { get { return isTransitioning; } }
 
-    bool collisionDisabled = false;
-
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        scoreKeeper = FindObjectOfType<ScoreKeeper>();
     }
 
     void Update()
     {
-        RespondToDebugKeys();
-    }
-
-    void RespondToDebugKeys()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            NextLevelSequence();
-        }
-
-        else if (Input.GetKeyDown(KeyCode.C))
-        {
-            collisionDisabled = !collisionDisabled;
-        }
+        
     }
 
     void OnCollisionEnter(Collision other)
     {
-        if (isTransitioning || collisionDisabled) { return; }
+        if (isTransitioning) { return; }
 
         switch (other.gameObject.tag)
         {
             case "Friendly":
-                Debug.Log("This is friendly");
                 break;
 
             case "Finish":
-                Debug.Log("End of the game");
-                NextLevelSequence();
+                if (FindObjectOfType<ScoreTextHandler>().collectibleCount == 0)
+                {
+                    NextLevelSequence();
+                }
+
                 break;
 
             default:
-                Debug.Log("Boom!");
                 StartCrashSequence();
                 break;
         }
@@ -96,15 +80,11 @@ public class CollisionHandler : MonoBehaviour
             nextLevelIndex = 0;
         }
         SceneManager.LoadScene(nextLevelIndex);
-        FindObjectOfType<ScenePersist>().ResetScenePersist();
-        scoreKeeper.ResetScore();
     }
 
     void ReloadScene()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
-        FindObjectOfType<ScenePersist>().ResetScenePersist();
-        scoreKeeper.ResetScore();
     }
 }

@@ -7,10 +7,9 @@ public class CollectibleController : MonoBehaviour
 {
     [SerializeField] float freq;
     [SerializeField] float amp;
+    [SerializeField] AudioClip collectSound;
 
     Vector3 initPos;
-
-    ScoreKeeper scoreKeeper;
     CollisionHandler collisionHandler;
 
     /// <summary>
@@ -19,7 +18,6 @@ public class CollectibleController : MonoBehaviour
     /// </summary>
     void Start()
     {
-        scoreKeeper = FindObjectOfType<ScoreKeeper>();
         collisionHandler = FindObjectOfType<CollisionHandler>();
         initPos = transform.position;
     }
@@ -32,9 +30,11 @@ public class CollectibleController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        AudioSource.PlayClipAtPoint(collectSound, transform.position, 1f);
+
         if (other.gameObject.CompareTag("Player") && !collisionHandler.GetIsTransitioning)
         {
-            scoreKeeper.ModifyScore();
+            FindObjectOfType<ScoreTextHandler>().ModifyScoreText();
             Destroy(gameObject);
         }
     }

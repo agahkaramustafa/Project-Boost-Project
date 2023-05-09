@@ -37941,3 +37941,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   freq: 5
   amp: 0.3
+  collectSound: {fileID: 8300000, guid: c07e6610aa6480441b6251595767ab2b, type: 3}
