@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreTextHandler : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI levelText;
     
     public int collectibleCount;
 
@@ -13,8 +15,20 @@ public class ScoreTextHandler : MonoBehaviour
     void Awake()
     {
         collectibleCount = FindObjectsOfType<CollectibleController>().Length;
+
+        int buildIndex = SceneManager.GetActiveScene().buildIndex;
         
         scoreText.text = $"Remaining Stones: {collectibleCount}";
+
+        if (buildIndex == SceneManager.sceneCountInBuildSettings - 2)
+        {
+            levelText.text = "Final Level";
+        }
+        else
+        {
+            levelText.text = "Level " + buildIndex;
+        }
+        
     }
 
     // Update is called once per frame

@@ -22,11 +22,6 @@ public class CollisionHandler : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    void Update()
-    {
-        
-    }
-
     void OnCollisionEnter(Collision other)
     {
         if (isTransitioning) { return; }
@@ -55,7 +50,7 @@ public class CollisionHandler : MonoBehaviour
         isTransitioning = true;
         audioSource.Stop();
         crashParticle.Play();
-        audioSource.PlayOneShot(crashSound, 0.7f);
+        audioSource.PlayOneShot(crashSound, 0.4f);
         GetComponent<Movement>().enabled = false;
         Invoke("ReloadScene", delay);
     }
@@ -65,7 +60,7 @@ public class CollisionHandler : MonoBehaviour
         isTransitioning = true;
         audioSource.Stop();
         successParticle.Play();
-        audioSource.PlayOneShot(successSound);
+        audioSource.PlayOneShot(successSound, .4f);
         GetComponent<Movement>().enabled = false;
         Invoke("NextLevel", delay);
     }

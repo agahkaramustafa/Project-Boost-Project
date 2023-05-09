@@ -427,7 +427,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 3
   crashSound: {fileID: 8300000, guid: af257b4bbb3ec794b870ae584e5fae54, type: 3}
-  successSound: {fileID: 8300000, guid: 6d8dbf3fdaf571b4dbc747223c998d49, type: 3}
+  successSound: {fileID: 8300000, guid: 63433c3b63a808e498d62bf193956705, type: 3}
   crashParticle: {fileID: 4309458965520713204}
   successParticle: {fileID: 2487170047370754703}
 --- !u!1 &9074442924376083065
